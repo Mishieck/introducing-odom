@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A series of tutorials aimed at demonstrating how [Odom](https://github.com/riu-web/odom) works.
+A series of projects aimed at demonstrating how [Odom](https://github.com/riu-web/odom) works. The projects are used in the [Medium series]() that goes by the same title. Each episode of the series has its own branch.
 
 ## Authors
 
