@@ -14,4 +14,4 @@ Currently the series has only one author, [Mishieck Mwale](https://github.com/Mi
 
 ## License
 
-This series in under the [MIT license](https://choosealicense.com/licenses/mit/).
+This series is under the [MIT license](https://choosealicense.com/licenses/mit/).
