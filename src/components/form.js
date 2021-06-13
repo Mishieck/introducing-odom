@@ -1,0 +1,185 @@
+import AlertMessage from "./alert-message.js";
+import InputGroup from "./input-group.js";
+const { createComponent } = odom;
+
+const markup = `
+  <form>
+    <h2 class="heading">Sign Up</h2>
+    <section odom-src="alertMessage"></section>
+    <section odom-src="name"></section>
+    <section odom-src="email"></section>
+    <hr />
+    <section odom-src="password"></section>
+    <section odom-src="confirmPassword"></section>
+    <button type="submit">Sign Up</button>
+    <footer id="signup-signin">
+      <span>Already have an account? </span>
+      <a href="/signin">Sign in</a>.
+    </footer> 
+  </form>
+`;
+
+const styles = `
+  :scope {
+    width: 100%;
+    padding: var(--spacer-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  > *:not(footer) {
+    margin-bottom: var(--spacer-md);
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  .heading {
+    margin: 0;
+    margin-bottom: var(--spacer-lg);
+  }
+
+  hr {
+    width: 100%;
+    border-top: 2px solid var(--light);
+    margin-bottom: 1.5rem;
+  }
+
+  button {
+    align-self: flex-end;
+    border: none;
+    border-radius: var(--spacer-xs);
+    padding: var(--spacer-sm) var(--spacer-md);
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+  }
+
+  footer {
+    align-self: flex-start;
+  }
+
+  footer a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  @media (min-width: 576px) {
+    :scope {
+      border: 2px solid var(--light);
+      border-top-width: var(--spacer-xs);
+      border-radius: var(--spacer-md);
+      width: 450px;
+    }
+  }
+`;
+
+const data = {
+  name: {
+    type: "text",
+    name: "name",
+    label: "Full Name",
+    pattern: /[\w\s]{3,}/,
+    errorMessage: "Name must be 3 characters or more",
+    successMessage: "Name is valid"
+  },
+  email: {
+    type: "email",
+    name: "email",
+    label: "Email",
+    pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+    errorMessage: "Email is not valid",
+    successMessage: "Email is valid"
+  },
+  password: {
+    type: "password",
+    name: "password",
+    label: "Password",
+    pattern: /[\w\s]{8,}/,
+    errorMessage: "Password must be 8 characters or more",
+    successMessage: "Valid password"
+  },
+  confirmPassword: {
+    type: "password",
+    name: "confirm-password",
+    label: "Confirm Password",
+    pattern: /[\w\s]{8,}/,
+    errorMessage: "Passwords do not match",
+    successMessage: "Passwords match"
+  }
+};
+
+const Form = async ({ onsuccess }) => {
+  const onsubmit = (event) => {
+    event.preventDefault();
+
+    let allInputsValid = true,
+      invalidInputGroup = null;
+
+    for (const inputGroup of [name, email, password, confirmPassword]) {
+      if (inputGroup.hasValidValue()) continue;
+      allInputsValid = false;
+      invalidInputGroup = inputGroup;
+      break;
+    }
+
+    if (allInputsValid) {
+      button.disabled = true;
+      form.select(".input-group:last-of-type input", false).removeAttribute("name");
+      onsuccess();
+    } else onerror(invalidInputGroup);
+  };
+
+  const onerror = (inputGroup) => alertMessage.show(inputGroup.errorMessage);
+
+  const onSignupFail = (message) => {
+    if (!message) message = "Failed to sign up. Please try again.";
+    alertMessage.show(message);
+    button.disabled = false;
+  };
+
+  data.password.observer = (value) => {
+    confirmPassword.pattern = new RegExp(`^${value}$`);
+    confirmPassword.dynamicData.valid = false;
+    return value;
+  };
+
+  const name = await InputGroup(data.name);
+  const email = await InputGroup(data.email);
+  const password = await InputGroup(data.password);
+  const confirmPassword = await InputGroup(data.confirmPassword);
+  const alertMessage = await AlertMessage();
+
+  const eventListeners = {
+    ":scope": [
+      {
+        type: "submit",
+        listener: onsubmit
+      }
+    ]
+  };
+
+  const components = {
+    name,
+    email,
+    password,
+    confirmPassword,
+    alertMessage
+  };
+
+  const form = await createComponent({
+    props: { onSignupFail },
+    markup,
+    styles,
+    eventListeners,
+    utils: { components }
+  });
+
+  const button = form.select("button", false);
+  return form;
+};
+
+export default Form;
