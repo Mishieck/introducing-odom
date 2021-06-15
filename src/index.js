@@ -1,7 +1,6 @@
-import app from "./components/app.js";
-const { render } = odom;
+import App from "./components/app.js";
 
 (async () => {
-  const App = await app();
-  App.render("#app");
+  const app = await App();
+  app.render("#app");
 })();
