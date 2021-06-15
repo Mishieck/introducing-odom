@@ -67,6 +67,10 @@ const styles = `
     color: var(--primary);
   }
 
+  footer a:hover {
+    border-bottom: 2px solid var(--primary);
+  }
+
   @media (min-width: 576px) {
     :scope {
       border: 2px solid var(--light);
@@ -77,7 +81,7 @@ const styles = `
   }
 `;
 
-const data = {
+const props = {
   name: {
     type: "text",
     name: "name",
@@ -141,17 +145,16 @@ const Form = async ({ onsuccess }) => {
     button.disabled = false;
   };
 
-  data.password.observer = (value) => {
-    confirmPassword.pattern = new RegExp(`^${value}$`);
-    confirmPassword.dynamicData.valid = false;
-    return value;
-  };
-
-  const name = await InputGroup(data.name);
-  const email = await InputGroup(data.email);
-  const password = await InputGroup(data.password);
-  const confirmPassword = await InputGroup(data.confirmPassword);
+  const name = await InputGroup(props.name);
+  const email = await InputGroup(props.email);
+  const password = await InputGroup(props.password);
+  const confirmPassword = await InputGroup(props.confirmPassword);
   const alertMessage = await AlertMessage();
+
+  password.addObserver((value) => {
+    confirmPassword.pattern = new RegExp(`^${value}$`);
+    confirmPassword.setValidity(false);
+  });
 
   const eventListeners = {
     ":scope": [

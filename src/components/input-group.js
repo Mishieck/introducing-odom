@@ -31,7 +31,8 @@ const styles = `
 	}
 	
 	input:focus {
-		outline: 2px solid var(--light);
+    outline: none;
+    border-color: var(--dark);
 	}
 	
 	input.invalid {
@@ -53,13 +54,13 @@ const styles = `
 
 const InputGroup = async (props) => {
   const updateValue = (value) => {
-    InputGroup.dynamicData.valid = value;
+    inputGroup.dynamicData.valid = value;
     return value;
   };
 
   const updateValidity = (value) => {
-    const valid = InputGroup.pattern.test(value);
-    updateMessage(valid ? InputGroup.successMessage : InputGroup.errorMessage, valid);
+    const valid = inputGroup.pattern.test(value);
+    updateMessage(valid ? inputGroup.successMessage : inputGroup.errorMessage, valid);
     return valid;
   };
 
@@ -71,26 +72,28 @@ const InputGroup = async (props) => {
 
   const hasValidValue = () => {
     updateInputBorder();
-    return InputGroup.dynamicData.valid;
+    return inputGroup.dynamicData.valid;
   };
 
   const updateInputBorder = () => {
-    if (InputGroup.dynamicData.valid) inputElement.classList.remove("invalid");
+    if (inputGroup.dynamicData.valid) inputElement.classList.remove("invalid");
     else inputElement.classList.add("invalid");
   };
 
-  const valueUpdaters = [updateValue];
+  props.addObserver = (observer) => {
+    inputGroup.dynamicData.addUpdater("value", (value) => {
+      observer(value);
+      return value;
+    });
+  };
 
-  if (props.observer) {
-    valueUpdaters.push(props.observer);
-    props.observer = undefined;
-  }
+  props.setValidity = (valid) => (inputGroup.dynamicData.valid = valid);
 
   const data = {
     dynamic: {
       value: {
         data: "",
-        updaters: valueUpdaters
+        updaters: [updateValue]
       },
       valid: {
         data: false,
@@ -117,10 +120,10 @@ const InputGroup = async (props) => {
 
   props.hasValidValue = hasValidValue;
   const options = { props, markup, styles, attributes, utils: { data, texts } };
-  const InputGroup = await createComponent(options);
-  const inputElement = InputGroup.select("input", false);
-  const messageElement = InputGroup.select("span", false);
-  return InputGroup;
+  const inputGroup = await createComponent(options);
+  const inputElement = inputGroup.select("input", false);
+  const messageElement = inputGroup.select("span", false);
+  return inputGroup;
 };
 
 export default InputGroup;
