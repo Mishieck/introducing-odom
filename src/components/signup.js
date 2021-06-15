@@ -1,5 +1,5 @@
 import Form from "./form.js";
-import ConfirmMessage from "./confirm-message.js";
+import ConfirmationMessage from "./confirmation-message.js";
 const { createComponent, replaceNode } = odom;
 
 const markup = `
@@ -23,11 +23,11 @@ const styles = `
 
 const Signup = async () => {
   const onsuccess = async () => {
-    const confirmMessage = await ConfirmMessage();
-    const formElement = signup.select("form", false);
+    const confirmationMessage = await ConfirmationMessage();
+    const formElement = form.scope;
     const response = await sendForm(formElement);
 
-    if (response.status === 200) replaceNode(formElement, confirmMessage.scope);
+    if (response.status === 200) replaceNode(formElement, confirmationMessage);
     else form.onSignupFail();
   };
 

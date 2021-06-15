@@ -1,7 +1,7 @@
 const { createComponent } = odom;
 
 const markup = `
-  <section class="hide">
+  <section>
     <h2>Signup Successful</h2>
     <a href="/login">Sign In</a>
   </section>
@@ -37,19 +37,9 @@ const styles = `
   }
 `;
 
-const AlertMessage = async () => {
-  const show = (message) => {
-    const text = AlertMessage.select(".text");
-    if (message) text.textContent = message;
-    AlertMessage.scope.classList.remove(".hide");
-  };
-
-  const hide = () => AlertMessage.scope.classList.add(".hide");
-
-  const props = { show };
-
-  const AlertMessage = await createComponent({ markup, styles });
-  return AlertMessage;
+const ConfirmationMessage = async () => {
+  const confirmationMessage = await createComponent({ markup, styles });
+  return confirmationMessage.scope;
 };
 
-export default AlertMessage;
+export default ConfirmationMessage;
