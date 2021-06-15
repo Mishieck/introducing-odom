@@ -11,7 +11,6 @@ const styles = `
   :scope {
     --dark: #444;
     --error: #c44;
-    --gray: #080808;
     --light: #ccc;
     --primary: #a985f1;
     --success: #4c4;
