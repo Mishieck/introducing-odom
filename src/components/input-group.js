@@ -114,8 +114,7 @@ const InputGroup = async (props) => {
   };
 
   const texts = {
-    label: props.label,
-    successMessage: props.successMessage
+    label: props.label
   };
 
   props.hasValidValue = hasValidValue;
