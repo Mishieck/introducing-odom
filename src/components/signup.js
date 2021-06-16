@@ -22,7 +22,7 @@ const styles = `
 `;
 
 const Signup = async () => {
-  const onsuccess = async () => {
+  const onvalid = async () => {
     const confirmationMessage = await ConfirmationMessage();
     const formElement = form.scope;
     const response = await sendForm(formElement);
@@ -31,7 +31,7 @@ const Signup = async () => {
     else form.onSignupFail();
   };
 
-  const form = await Form({ onsuccess });
+  const form = await Form({ onvalid });
 
   const signup = await createComponent({
     markup,

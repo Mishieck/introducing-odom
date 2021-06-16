@@ -120,7 +120,7 @@ const props = {
   }
 };
 
-const Form = async ({ onsuccess }) => {
+const Form = async ({ onvalid }) => {
   const onsubmit = (event) => {
     event.preventDefault();
 
@@ -137,7 +137,7 @@ const Form = async ({ onsuccess }) => {
     if (allInputsValid) {
       button.disabled = true;
       confirmPassword.select("input", false).removeAttribute("name");
-      onsuccess();
+      onvalid();
     } else onerror(invalidInputGroup);
   };
 
