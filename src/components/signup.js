@@ -41,7 +41,7 @@ const Signup = async () => {
     }
   });
 
-  return signup;
+  return signup.scope;
 };
 
 const sendForm = async (form) => {

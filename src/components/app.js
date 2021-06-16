@@ -3,7 +3,7 @@ const { createComponent } = odom;
 
 const markup = `
   <div>
-    <div odom-src="Signup"></div>
+    <div odom-node="Signup"></div>
   </div>
 `;
 
@@ -33,7 +33,7 @@ const App = async () => {
     markup,
     styles,
     utils: {
-      components: { Signup }
+      nodes: { Signup }
     }
   });
 };
