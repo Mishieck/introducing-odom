@@ -57,6 +57,10 @@ const styles = `
     cursor: pointer;
   }
 
+  button[disabled] {
+    background-color: var(--gray);
+  }
+
   footer {
     align-self: flex-start;
   }
@@ -132,7 +136,7 @@ const Form = async ({ onsuccess }) => {
 
     if (allInputsValid) {
       button.disabled = true;
-      form.select(".input-group:last-of-type input", false).removeAttribute("name");
+      confirmPassword.select("input", false).removeAttribute("name");
       onsuccess();
     } else onerror(invalidInputGroup);
   };

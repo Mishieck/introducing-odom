@@ -22,13 +22,13 @@ const styles = `
 const AlertMessage = async () => {
   const show = (message) => {
     if (message) text.textContent = message;
-    AlertMessage.scope.classList.remove("hide");
+    alertMessage.scope.classList.remove("hide");
   };
 
   const props = { show };
-  const AlertMessage = await createComponent({ props, markup, styles });
-  const text = AlertMessage.select(".text", false);
-  return AlertMessage;
+  const alertMessage = await createComponent({ props, markup, styles });
+  const text = alertMessage.select(".text", false);
+  return alertMessage;
 };
 
 export default AlertMessage;

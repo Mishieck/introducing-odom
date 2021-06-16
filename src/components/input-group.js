@@ -1,55 +1,55 @@
 const { createComponent } = odom;
 
 const markup = `
-	<section class="input-group">
-		<label for="@props.inputID">
-			<span odom-text="label"></span>
-		</label>
-		<input />
-		<span class="message"></span>
-	</section>
+<section class="input-group">
+  <label for="@props.inputID">
+    <span odom-text="label"></span>
+  </label>
+  <input />
+  <span class="message"></span>
+</section>
 `;
 
 const styles = `
-	:scope {
-		display: flex;
-		flex-direction: column;
-	}
-	
-	label {
-		text-transform: uppercase;
-		font-size: 0.8rem;
+  :scope {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    text-transform: uppercase;
+    font-size: 0.8rem;
     font-weight: 600;
-	}
-	
-	input {
-		margin: var(--spacer-xs) 0;
+  }
+
+  input {
+    margin: var(--spacer-xs) 0;
     padding: 0.5rem;
     border: 2px solid var(--light);
     border-radius: 0.25rem;
     font-size: 1.2rem;
-	}
-	
-	input:focus {
+  }
+
+  input:focus {
     outline: none;
     border-color: var(--dark);
-	}
-	
-	input.invalid {
-		border-color: var(--error);
-	}
-	
-	.message {
-		font-size: 0.8rem;
-	}
-	
-	.message.valid {
-		color: var(--success);
-	}
-	
-	.message.invalid {
-		color: var(--error);
-	}
+  }
+
+  input.invalid {
+    border-color: var(--error);
+  }
+
+  .message {
+    font-size: 0.8rem;
+  }
+
+  .message.valid {
+    color: var(--success);
+  }
+
+  .message.invalid {
+    color: var(--error);
+  }
 `;
 
 const InputGroup = async (props) => {

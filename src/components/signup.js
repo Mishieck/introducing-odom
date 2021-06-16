@@ -37,7 +37,6 @@ const Signup = async () => {
     markup,
     styles,
     utils: {
-      methods: { onsuccess },
       components: { form }
     }
   });
@@ -47,7 +46,7 @@ const Signup = async () => {
 
 const sendForm = async (form) => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve({ status: 200 }), 1000);
+    setTimeout(() => resolve({ status: 200 }), 500);
   });
 
   const formData = new URLSearchParams(new FormData(form));
