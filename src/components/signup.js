@@ -3,7 +3,7 @@ import ConfirmationMessage from "./confirmation-message.js";
 const { createComponent, replaceNode } = odom;
 
 const markup = `
-  <div class="signup">
+  <div>
     <div odom-src="form"></div>
   </div>
 `;
