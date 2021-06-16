@@ -1,13 +1,13 @@
 const { createComponent } = odom;
 
 const markup = `
-<section class="input-group">
-  <label for="@props.inputID">
-    <span odom-text="label"></span>
-  </label>
-  <input />
-  <span class="message"></span>
-</section>
+  <section class="input-group">
+    <label for="@props.inputID">
+      <span odom-text="label"></span>
+    </label>
+    <input />
+    <span class="message"></span>
+  </section>
 `;
 
 const styles = `
