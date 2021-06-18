@@ -60,7 +60,7 @@ const InputGroup = async (props) => {
 
   const updateValidity = (value) => {
     if (typeof value === "string") value = inputGroup.pattern.test(value);
-    updateMessage(value ? inputGroup.successMessage : inputGroup.instruction, value);
+    updateMessage(value ? inputGroup.successMessage : inputGroup.errorMessage, value);
     return value;
   };
 
@@ -121,7 +121,8 @@ const InputGroup = async (props) => {
   const options = { props, markup, styles, attributes, utils: { data, texts } };
   const inputGroup = await createComponent(options);
   const inputElement = inputGroup.select("input", false);
-  const messageElement = inputGroup.select("span", false);
+  const messageElement = inputGroup.select(".message", false);
+  messageElement.textContent = props.instruction;
   return inputGroup;
 };
 
