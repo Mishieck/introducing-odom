@@ -14,7 +14,7 @@ const markup = `
     <button type="submit">Sign Up</button>
     <footer id="signup-signin">
       <span>Already have an account? </span>
-      <a href="/signin">Sign in</a>.
+      <a href="#">Sign in</a>.
     </footer> 
   </form>
 `;
