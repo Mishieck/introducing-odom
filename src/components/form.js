@@ -115,7 +115,7 @@ const props = {
     name: "confirm-password",
     label: "Confirm Password",
     pattern: /[\w\s]{8,}/,
-    instruction: "Passwords do not match",
+    instruction: "Passwords must match",
     successMessage: "Passwords match"
   }
 };
