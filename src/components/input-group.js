@@ -59,9 +59,9 @@ const InputGroup = async (props) => {
   };
 
   const updateValidity = (value) => {
-    const valid = inputGroup.pattern.test(value);
-    updateMessage(valid ? inputGroup.successMessage : inputGroup.instruction, valid);
-    return valid;
+    if (typeof value === "string") value = inputGroup.pattern.test(value);
+    updateMessage(value ? inputGroup.successMessage : inputGroup.instruction, value);
+    return value;
   };
 
   const updateMessage = (message, valid) => {
