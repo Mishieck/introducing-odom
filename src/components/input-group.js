@@ -60,7 +60,7 @@ const InputGroup = async (props) => {
 
   const updateValidity = (value) => {
     const valid = inputGroup.pattern.test(value);
-    updateMessage(valid ? inputGroup.successMessage : inputGroup.errorMessage, valid);
+    updateMessage(valid ? inputGroup.successMessage : inputGroup.instruction, valid);
     return valid;
   };
 

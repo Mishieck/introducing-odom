@@ -91,7 +91,7 @@ const props = {
     name: "name",
     label: "Full Name",
     pattern: /[\w\s]{3,}/,
-    errorMessage: "Name must be 3 characters or more",
+    instruction: "Name must be 3 characters or more",
     successMessage: "Name is valid"
   },
   email: {
@@ -99,7 +99,7 @@ const props = {
     name: "email",
     label: "Email",
     pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-    errorMessage: "Email is not valid",
+    instruction: "Email is not valid",
     successMessage: "Email is valid"
   },
   password: {
@@ -107,7 +107,7 @@ const props = {
     name: "password",
     label: "Password",
     pattern: /[\w\s]{8,}/,
-    errorMessage: "Password must be 8 characters or more",
+    instruction: "Password must be 8 characters or more",
     successMessage: "Valid password"
   },
   confirmPassword: {
@@ -115,7 +115,7 @@ const props = {
     name: "confirm-password",
     label: "Confirm Password",
     pattern: /[\w\s]{8,}/,
-    errorMessage: "Passwords do not match",
+    instruction: "Passwords do not match",
     successMessage: "Passwords match"
   }
 };
@@ -141,7 +141,7 @@ const Form = async ({ onvalid }) => {
     } else onerror(invalidInputGroup);
   };
 
-  const onerror = (inputGroup) => alertMessage.show(inputGroup.errorMessage);
+  const onerror = (inputGroup) => alertMessage.show(inputGroup.instruction);
 
   const onSignupFail = (message) => {
     if (!message) message = "Failed to sign up. Please try again.";
